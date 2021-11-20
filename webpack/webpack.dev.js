@@ -6,9 +6,6 @@ const {
   prod_Path,
   src_Path
 } = require('./path');
-const {
-  selectedPreprocessor
-} = require('./loader');
 
 module.exports = {
   entry: {
@@ -30,32 +27,11 @@ module.exports = {
       test: /\.ts?$/,
       use: 'ts-loader',
       exclude: /node_modules/
-    }, {
-      test: selectedPreprocessor.fileRegexp,
-      use: [{
-          loader: MiniCssExtractPlugin.loader
-        },
-        {
-          loader: 'css-loader',
-          options: {
-            modules: false,
-            sourceMap: true
-          }
-        },
-        {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: true
-          }
-        },
-        {
-          loader: selectedPreprocessor.loaderName,
-          options: {
-            sourceMap: true
-          }
-        },
-      ]
-    }]
+    },{
+      test: /\.css$/i,
+      use: ["style-loader", "css-loader"],
+    }
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({

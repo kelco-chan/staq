@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const { prod_Path, src_Path } = require("./path");
-const { selectedPreprocessor } = require("./loader");
 
 module.exports = {
   entry: {
@@ -25,23 +24,9 @@ module.exports = {
         test: /\.ts?$/,
         use: "ts-loader",
         exclude: /node_modules/
-      },
-      {
-        test: selectedPreprocessor.fileRegexp,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "postcss-loader"
-          },
-          {
-            loader: selectedPreprocessor.loaderName
-          }
-        ]
+      },{
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       }
     ]
   },
