@@ -41,4 +41,7 @@ export default class Vector{
     rotate(radians: number){
         return this.multiply(Math.cos(radians), -Math.sin(radians), Math.sin(radians), Math.cos(radians))
     }
+    scalarCross(v2: Vector){
+        return this.x * v2.y - v2.x * this.y
+    }
 }
