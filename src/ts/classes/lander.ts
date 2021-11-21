@@ -1,5 +1,5 @@
-import type Scene from "./scene";
-import Vector from "./vector";
+import type Scene from "./Scene";
+import Vector from "./Vector";
 import { LANDER_RENDER_HEIGHT, LANDER_RENDER_WIDTH, MAIN_ENGINE_THRUST} from "../config";
 type TranslationalInformation = {
     mass: number,
@@ -60,6 +60,7 @@ export default class Lander{
         this.scene.ctx.translate(-renderedPosition.x, -renderedPosition.y);
         //draw
         this.scene.ctx.fillStyle = this.color;
+        this.scene.ctx.strokeStyle = this.color;
         //this.scene.ctx.fillRect(renderedPosition.x - LANDER_RENDER_WIDTH/2, renderedPosition.y - LANDER_RENDER_HEIGHT/2, LANDER_RENDER_WIDTH, LANDER_RENDER_HEIGHT)
         this.scene.ctx.beginPath();
 

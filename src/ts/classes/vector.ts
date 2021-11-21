@@ -44,4 +44,7 @@ export default class Vector{
     scalarCross(v2: Vector){
         return this.x * v2.y - v2.x * this.y
     }
+    toString(): string{
+        return `X: ${this.x.toFixed(0)} Y: ${this.y.toFixed(0)} MAGN: ${this.magntiude.toFixed(0)}`
+    }
 }
