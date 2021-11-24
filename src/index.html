@@ -12,11 +12,37 @@
   </head>
 
   <body>
-    <canvas></canvas>
-    <div class="draggable-box lander-telemetry" draggable="true">
-      <div class="heading">Lander telemetry</div>
-      <div class="body">Please click on a lander to see its information</div>
+    <div class="nav">
+      <div class="title">STAQ Rocket simulation</div>
+      <a class="link" href="#about">About</a>
+      <a class="link active" href="#simulation">Simulation</a>
+      <a class="link" href="#credits">Credits</a>
     </div>
+    <div class="pages">
+      <div id="about">
+        Hello! Welcome to this STAQ rocket thingo. Controls: <br />
+        <br />
+        Black rocket: <br />
+        <br />
+        W -> fire main engine <br />
+        A -> fire right engines <br />
+        D -> fire left engines <br />
+        q -> roll counterclockwise <br />
+        e -> roll clockwise <br />
+        <br />
+        Head over to the simulation <a href="#simulation" style="color: var(--text)">here!</a>
+      </div>
+      <div id="simulation" class="active">
+        sim
+        <canvas></canvas>
+        <div class="draggable-box lander-telemetry" draggable="true">
+          <div class="heading">Lander telemetry</div>
+          <div class="body">Please click on a lander to see its information</div>
+        </div>
+      </div>
+      <div id="credits">Credits</div>
+    </div>
+    
     <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
   </body>
 </html>

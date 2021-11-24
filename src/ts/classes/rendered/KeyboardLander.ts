@@ -1,18 +1,20 @@
-import Lander, {TranslationalInformation, RotationalInformation, Engine} from "./Lander";
-import Scene from "./Scene";
-import Vector from "./Vector";
+import Lander, {TranslationalInformation, RotationalInformation, Engine} from "../core/Lander";
+import RenderedLander from "./RenderedLander";
+import RenderedScene from "./RenderedScene";
+import Scene from "../core/Scene";
+import Vector from "../core/Vector";
 type KeyboardMapping = {
     [key:string]: {
         engine:string,
         throttle: number
     }[]
 }
-export default class KeyboardLander extends Lander{
+export default class KeyboardLander extends RenderedLander{
     keyMap: Map<string, boolean>
     path: Vector[];
     keyboardMapping: KeyboardMapping
     frames: number;
-    constructor(scene: Scene, t: TranslationalInformation, r: RotationalInformation, e: Engine[], color:string, keyboardMapping: KeyboardMapping){
+    constructor(scene: RenderedScene, t: TranslationalInformation, r: RotationalInformation, e: Engine[], color:string, keyboardMapping: KeyboardMapping){
         super(scene, t, r, e, color);
         this.keyMap = new Map();
         this.path = [];

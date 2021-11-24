@@ -1,9 +1,10 @@
-import Scene, {hooks} from "./ts/classes/Scene";
-import Lander from "./ts/classes/Lander";
-import Vector from "./ts/classes/Vector";
+import Lander from "./ts/classes/core/Lander";
+import Vector from "./ts/classes/core/Vector";
 import "./styles/index.css";
 import "./ts/components/DraggableBox"
-import KeyboardLander from "./ts/classes/KeyboardLander";
+import "./ts/components/pages"
+import KeyboardLander from "./ts/classes/rendered/KeyboardLander";
+import RenderedScene, { landerHook } from "./ts/classes/rendered/RenderedScene";
 window.addEventListener("load", function(){
     //start the landing sequence
     console.log("Loading scene ...")
@@ -11,7 +12,7 @@ window.addEventListener("load", function(){
     const rect = canvas.getBoundingClientRect();
     canvas.width = rect.width;
     canvas.height = rect.height
-    const scene = new Scene(5, canvas,[]);
+    const scene = new RenderedScene(5, canvas,[]);
     scene.addLander(new KeyboardLander(scene, {
         mass: 100, 
         position:new Vector(0, 50), 
@@ -88,7 +89,7 @@ window.addEventListener("load", function(){
         d: [{engine:"topleft", throttle: 1}, {engine: "bottomleft", throttle:1}],
     }));
     scene.addHook(
-        hooks.focusLander(document.querySelector(".lander-telemetry .body"))
+        landerHook(document.querySelector(".lander-telemetry .body"))
     )
     
     scene.start()

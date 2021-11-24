@@ -1,6 +1,5 @@
 import type Scene from "./Scene";
 import Vector from "./Vector";
-import { LANDER_RENDER_HEIGHT, LANDER_RENDER_WIDTH, MAIN_ENGINE_THRUST} from "../config";
 type TranslationalInformation = {
     mass: number,
     position: Vector,
@@ -23,7 +22,6 @@ export default class Lander{
     position: Vector;
     velocity: Vector;
     angle: number;
-    color: string;
     momentOfInertia: number;
     mass: number;
     registeredForces: Vector[];
@@ -32,7 +30,7 @@ export default class Lander{
     angularSpeed: number;
     engines: Engine[];
 
-    constructor(scene: Scene, {mass, position, velocity}: TranslationalInformation, {momentOfInertia, angle, angularSpeed}: RotationalInformation, engines:Engine[],color:string){
+    constructor(scene: Scene, {mass, position, velocity}: TranslationalInformation, {momentOfInertia, angle, angularSpeed}: RotationalInformation, engines:Engine[]){
         this.scene = scene;
         
         this.mass = mass;
@@ -45,38 +43,10 @@ export default class Lander{
 
         this.engines = engines;
 
-        this.color = color;
-
         this.registeredForces = [];
         this.registeredTorques = [];
     }
-    render(){
-        //Transforms physics coordinate system into canvas coordinate system;
-        const renderedPosition = this.scene.transformCoordinates(this.position);
-
-        this.scene.ctx.save();
-        this.scene.ctx.translate(renderedPosition.x, renderedPosition.y);
-        this.scene.ctx.rotate(-this.angle);
-        this.scene.ctx.translate(-renderedPosition.x, -renderedPosition.y);
-        //draw
-        this.scene.ctx.fillStyle = this.color;
-        this.scene.ctx.strokeStyle = this.color;
-        //this.scene.ctx.fillRect(renderedPosition.x - LANDER_RENDER_WIDTH/2, renderedPosition.y - LANDER_RENDER_HEIGHT/2, LANDER_RENDER_WIDTH, LANDER_RENDER_HEIGHT)
-        this.scene.ctx.beginPath();
-
-        this.scene.ctx.moveTo(renderedPosition.x - LANDER_RENDER_WIDTH/2, renderedPosition.y - LANDER_RENDER_HEIGHT/2);
-        this.scene.ctx.lineTo(renderedPosition.x + LANDER_RENDER_WIDTH/2,renderedPosition.y - LANDER_RENDER_HEIGHT/2);
-        this.scene.ctx.lineTo(renderedPosition.x + LANDER_RENDER_WIDTH/2,renderedPosition.y + LANDER_RENDER_HEIGHT/6);
-        this.scene.ctx.lineTo(renderedPosition.x + LANDER_RENDER_WIDTH/6,renderedPosition.y + LANDER_RENDER_HEIGHT/6);
-        this.scene.ctx.lineTo(renderedPosition.x + LANDER_RENDER_WIDTH/2,renderedPosition.y + LANDER_RENDER_HEIGHT/2)
-        this.scene.ctx.lineTo(renderedPosition.x - LANDER_RENDER_WIDTH/2,renderedPosition.y + LANDER_RENDER_HEIGHT/2)
-        this.scene.ctx.lineTo(renderedPosition.x - LANDER_RENDER_WIDTH/6,renderedPosition.y + LANDER_RENDER_HEIGHT/6);
-        this.scene.ctx.lineTo(renderedPosition.x - LANDER_RENDER_WIDTH/2,renderedPosition.y + LANDER_RENDER_HEIGHT/6);
-
-        this.scene.ctx.fill();
-
-        this.scene.ctx.restore();
-    }
+    
     registerForce(f: Vector){
         this.registeredForces.push(f);
     }
