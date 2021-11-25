@@ -28,6 +28,7 @@
     "webpack-md5-hash": "0.0.6"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^3.11.0",
     "normalize.css": "^8.0.1",
     "style-loader": "^0.21.0"
   }
